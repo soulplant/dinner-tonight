@@ -10,7 +10,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 import javax.servlet.ServletRegistration;
-import java.io.*;
+import java.io.File;
 
 public class MainApplication extends Application<MainConfiguration> {
 
@@ -28,11 +28,12 @@ public class MainApplication extends Application<MainConfiguration> {
         ImmutableMap.<String, String>builder()
             .put("css", "text/css")
             .build());
-    ApiServlet apiServlet = new ApiServlet();
 
     ServletRegistration.Dynamic registration = environment.servlets().addServlet("app", fileServlet);
     registration.addMapping("/*");
     registration.setAsyncSupported(true);
+
+    ApiServlet apiServlet = DaggerApiServletComponent.create().servlet();
 
     registration = environment.servlets().addServlet("api", apiServlet);
     registration.addMapping("/api/*");

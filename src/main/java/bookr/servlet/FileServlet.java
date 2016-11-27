@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +35,6 @@ public class FileServlet extends HttpServlet {
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String uri = req.getRequestURI();
-    System.out.println("uri = " + uri);
     if (uri.isEmpty() || uri.equals("/")) {
       serveFile(resp, localFile("index.html"));
       return;
