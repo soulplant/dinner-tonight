@@ -1,5 +1,3 @@
-Heroku app is dinner-tonight.
-
 To make it so you can run the server from IntelliJ
 
 1. Run > Edit configurations.
@@ -7,6 +5,11 @@ To make it so you can run the server from IntelliJ
 3. Add Environment variables: PORT=9999
 
 
-Client
+# Client
 
 To build / run the client we use angular-cli. Follow the instructions at https://github.com/angular/angular-cli.
+
+# Backend
+
+Heroku app is dinner-tonight.
+Github is github.com/soulplant/dinner-tonight.
