@@ -9,6 +9,12 @@ To make it so you can run the server from IntelliJ
 
 To build / run the client we use angular-cli. Follow the instructions at https://github.com/angular/angular-cli.
 
+Client is in the client/ directory. For a dev process:
+
+1. npm install -g angular-cli
+1. cd client
+1. ng serve
+
 # Backend
 
 Heroku app is dinner-tonight.
