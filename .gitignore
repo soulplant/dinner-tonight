@@ -2,3 +2,7 @@ _assets/
 .gradle/
 build/
 out/
+*.iml
+*.ipr
+*.iws
+.idea/
