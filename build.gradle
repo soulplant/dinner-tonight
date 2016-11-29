@@ -1,3 +1,11 @@
+plugins {
+  id "com.moowork.node" version "0.14"
+}
+
+node {
+  nodeModulesDir = file("${project.projectDir}/client")
+}
+
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
@@ -18,4 +26,10 @@ dependencies {
     )
 }
 
-task stage(dependsOn: ['clean', 'installDist'])
+task ngBuild(type: NodeTask, dependsOn: [npm_install]) {
+  script = file("${project.projectDir}/client/node_modules/.bin/ng")
+  args = ['build', '--prod']
+  workingDir = file("${project.projectDir}/client")
+}
+
+task stage(dependsOn: ['clean', 'installDist', ngBuild])
