@@ -11,6 +11,7 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -28,7 +29,12 @@ public class MainApplication extends Application<MainConfiguration> {
     ServletRegistration.Dynamic servlet = environment.servlets().addServlet("api", new HttpServlet() {
       @Override
       public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        File file = new File(".");
         PrintWriter writer = res.getWriter();
+        writer.println(file.getAbsolutePath());
+        for (File f : file.listFiles()) {
+          writer.println(f.getAbsolutePath());
+        }
         writer.println("HI");
         writer.close();
       }
