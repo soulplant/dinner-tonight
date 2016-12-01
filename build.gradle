@@ -32,4 +32,4 @@ task ngBuild(type: NodeTask, dependsOn: [npm_install]) {
   workingDir = file("${project.projectDir}/client")
 }
 
-task stage(dependsOn: ['clean', 'installDist', ngBuild])
+task stage(dependsOn: ['clean', 'installDist'])
