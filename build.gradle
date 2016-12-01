@@ -17,7 +17,7 @@ repositories() {
 }
 
 run {
-  args 'server', './local.yml'
+  args 'server', './dev.yml'
 }
 
 dependencies {
