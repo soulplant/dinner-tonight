@@ -1,19 +1,16 @@
 package bookr;
 
+import bookr.servlet.ApiServlet;
+import bookr.servlet.FileServlet;
+import com.google.common.collect.ImmutableMap;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class MainApplication extends Application<MainConfiguration> {
 
@@ -26,20 +23,19 @@ public class MainApplication extends Application<MainConfiguration> {
   @Override
   public void run(MainConfiguration configuration, Environment environment) throws Exception {
     environment.jersey().disable();
-    ServletRegistration.Dynamic servlet = environment.servlets().addServlet("api", new HttpServlet() {
-      @Override
-      public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
-        File file = new File(".");
-        PrintWriter writer = res.getWriter();
-        writer.println(file.getAbsolutePath());
-        for (File f : file.listFiles()) {
-          writer.println(f.getAbsolutePath());
-        }
-        writer.println("HI");
-        writer.close();
-      }
-    });
-    servlet.addMapping("/api/*");
-    servlet.setAsyncSupported(true);
+    FileServlet fileServlet = new FileServlet("", new File("client/dist/"));
+    fileServlet.addMimeTypes(
+        ImmutableMap.<String, String>builder()
+            .put("css", "text/css")
+            .build());
+    ApiServlet apiServlet = new ApiServlet();
+
+    ServletRegistration.Dynamic registration = environment.servlets().addServlet("app", fileServlet);
+    registration.addMapping("/*");
+    registration.setAsyncSupported(true);
+
+    registration = environment.servlets().addServlet("api", apiServlet);
+    registration.addMapping("/api/*");
+    registration.setAsyncSupported(true);
   }
 }
