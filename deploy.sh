@@ -14,8 +14,10 @@ git checkout -b deploy
   ng build --prod
 )
 bazel build java/bookr:bookr_deploy.jar
+mkdir -p bin
+cp bazel-bin/java/bookr/bookr{,_deploy.jar} bin
 git add -f client/dist
-git add -f bazel-bin/java/bookr/bookr_deploy.jar
+git add -f bin
 git commit -m "Deploy @ `date`"
 git push heroku deploy:master --force
 git checkout master

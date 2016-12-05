@@ -1,1 +1,1 @@
-web: bazel-bin/java/bookr/bookr --singlejar server dev.yml
+web: bin/bookr --singlejar server dev.yml
