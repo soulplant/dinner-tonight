@@ -1,8 +1,7 @@
 _assets/
-.gradle/
-build/
-out/
 *.iml
 *.ipr
 *.iws
 .idea/
+bazel-*
+.DS_Store
