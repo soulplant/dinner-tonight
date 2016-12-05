@@ -9,8 +9,13 @@ fi
 
 git branch -D deploy
 git checkout -b deploy
-gradle ngBuild
+(
+  cd client ;
+  ng build --prod
+)
+bazel build java/bookr:bookr_deploy.jar
 git add -f client/dist
+git add -f bazel-bin/java/bookr/bookr_deploy.jar
 git commit -m "Deploy @ `date`"
 git push heroku deploy:master --force
 git checkout master

@@ -1,1 +1,1 @@
-web: build/install/dinner-tonight/bin/dinner-tonight server dev.yml
+web: bazel-bin/java/bookr/bookr --singlejar server dev.yml
