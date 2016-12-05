@@ -15,7 +15,7 @@ git checkout -b deploy
 )
 bazel build java/bookr:bookr_deploy.jar
 mkdir -p bin
-cp bazel-bin/java/bookr/bookr{,_deploy.jar} bin
+cp bazel-bin/java/bookr/bookr_deploy.jar bin
 echo 'task stage()' > build.gradle
 git add -f client/dist
 git add -f bin

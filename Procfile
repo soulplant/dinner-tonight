@@ -1,1 +1,1 @@
-web: bin/bookr --singlejar server dev.yml
+web: java -jar bin/bookr_deploy.jar server dev.yml
