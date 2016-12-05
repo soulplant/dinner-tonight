@@ -13,7 +13,7 @@ Client is in the client/ directory. For a dev process:
 
 1. npm install -g angular-cli
 1. cd client
-1. ng serve
+1. ng serve  # or ./rundev.sh to also set up a proxy for /api to localhost:8080
 
 # Backend
 
